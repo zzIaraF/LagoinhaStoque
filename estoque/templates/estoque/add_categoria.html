@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+{%block title %}Categorias{%endblock title %}
+
+{%block titulo %}
+Cadastrar Categoria
+{%endblock titulo %}
+
+{% block conteudo %}
+<form class="mt-4" enctype="multipart/form-data" method="post" action="{% url 'cadastro_categorias' %}">
+    {% csrf_token %}
+
+    
+    <div class="input-group mb-4">
+        <span  class="col-sm-2 col-form-label">Nome</span>
+        <input  type="text" id="cat_nome" name='nome' placeholder="Nome da categoria" class="form-control" style="color: black !important;" required>>
+    </div>
+    <div id="contforncedor">
+        <button class="w-25 btn btn-lg btn-primary mx-auto" type="submit">Cadastrar</button>
+    </div>
+</form>
+
+{% endblock conteudo %}
+

@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Detalhes de fornecedor{% endblock title %}
+{% block titulo %}
+Detalhes do fornecedor: {{ fornecedor.razaosocial }}
+{% endblock titulo %}
+{% block conteudo %}
+    <div class="card" id="det_forn">
+        <div class="card-header text-white bg-dark">
+            Fornecedor: {{ fornecedor.razaosocial }}
+        </div>
+        <div class="card-body">
+            <h5 class="card-title mb-3"> Razão social: {{ fornecedor.razaosocial}}</h5>
+            <h5 class="card-title mb-3">CNPJ: {{ fornecedor.cnpj}}</h5>
+            <h5 class="card-title mb-3">Telefone:{{ fornecedor.telefone}}</h5>
+            <h5 class="card-title mb-3">Endereço: {{ fornecedor.endereco }}</h5>
+            <h5 class="card-title mb-3">Data de cadastro: {{ fornecedor.data }}</h5>
+           
+
+           
+            <div class="card-footer text-white {% if fornecedor.ativo %}bg-success{% else %}bg-danger{% endif %}">
+                Status: {% if fornecedor.ativo %}Ativo{% else %}Inativo{% endif %}
+                
+            </div>
+            <div class="text-center mt-4 mb-2">
+            <a href="{% url 'editar_fornecedor' fornecedor.id %}">
+                <button type="button" class=" btn btn-secondary btn-sm">Editar</button>
+
+            </div>
+        </div>
+    </div>
+
+  
+{% endblock conteudo %}

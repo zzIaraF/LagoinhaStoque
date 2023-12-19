@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Cadastrar Fornecedor{% endblock title %}
+
+{% block titulo %}
+Cadastrar fornecedor
+{% endblock titulo %}
+
+{% block conteudo %}
+
+  <form  method="POST" enctype="multipart/form-data" class="mt-4 ">
+    {% csrf_token %}
+    
+    <div > 
+      <div class="input-group mb-4">
+        <label for="id_razaosocial"  class="col-sm-2 col-form-label" >Razão Social:</label>
+        <input type="text" name="razaosocial" id="id_razaosocial" placeholder="Razão social" class="form-control"required>
+      </div>
+
+      <div class="input-group mb-4">
+        <label for="id_cnpj"  class="col-sm-2 col-form-label">CNPJ:</label>
+        <input type="text" name="cnpj" id="id_cnpj" placeholder="XXXXXXXXXXXXXX"class="form-control" required>
+    </div>
+    
+
+      <div class="input-group mb-4">
+        <label for="id_telefone"  class="col-sm-2 col-form-label" >Telefone:</label>
+        <input type="text" name="telefone" id="id_telefone" placeholder="xxxxxxxxxxx"class="form-control" required>
+      </div>
+
+      <div class="input-group mb-4">
+        <label for="id_endereco " class="col-sm-2 col-form-label">Endereço:</label>
+        <input type="text" name="endereco" id="id_telefone" placeholder="Endereço"class="form-control" required>
+      </div>
+
+    </div >
+
+    <div id="contforncedor">
+      <button class="w-25 btn btn-lg btn-primary mx-auto"  type="submit">Cadastrar</button>
+    </div>
+    
+  
+</form>
+
+
+{% endblock conteudo %}

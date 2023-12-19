@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+{% load static %}
+{% load permission_tags %}
+
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="shortcut icon" href="{% static 'img/gti.png' %}" type="image/x-icon"> -->
+    <title>{% block title %}{% endblock title %}</title>
+    <link rel="shortcut icon" href="{% static 'img/LagoinhaLogo.png' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap/bootstrap.min.css'%}" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin='anonymous'>
+    
+</head>
+
+<body>
+    {% include 'nav.html' %}
+    
+
+    <main>
+
+        <div id="ladoEsquerdobase">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="{% url 'lucro'%}">Lucro</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="{% url 'entradas'%}">Entradas</a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false">Estoque</a>
+                  <ul class="dropdown-menu custom-dropdown-menu">
+                      <li><a class="nav-link" href="{% url 'listaProdutos'%}">Produto</a></li>
+                      <li><a class="nav-link" href="{% url 'listagem_categorias'%}">Categoria</a></li>
+                      <li><a class="nav-link" href="{% url 'listarfornecedor'%}">Fornecedor</a></li>
+                  </ul>
+              </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'saidas'%}">Saídas</a>
+                </li>
+                {%if user|has_role:"gerente"%}
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'exibiruser'%}">Usuários</a>
+              </li>
+              {%else%}
+              <p></p>
+            {% endif %}
+                
+              </ul>
+
+        </div>
+        <div id="ladoDireitobase">
+          {% include 'messages.html' %}
+            <div id="baseDiv">
+                <h1>{% block titulo %}{% endblock titulo %}</h1>
+            </div> 
+        {% block conteudo %}
+        {% endblock conteudo %}
+
+        </div>
+        
+        {% block scripts %}{% endblock scripts %}
+    </main>
+
+    {% include 'footer.html' %}
+</body>
+<script src="{% static 'js/bootstrap/bootstrap.bundle.min.js' %}"></script>
+
+</html>

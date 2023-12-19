@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Login{% endblock title %}
+
+{% block titulo %}
+{% if not request.user.is_authenticated %}
+        Acessar o Sistema
+{%else%}
+      Bem vindo!
+{%endif%}
+{% endblock titulo %}
+
+{% block conteudo %}
+{% if form.errors %}
+<div class="alert alert-danger">
+  <ul>
+    {% for field, errors in form_errors %}
+      {% for error in errors %}
+        <li>{{ field }}: {{ error }}</li>
+      {% endfor %}
+    {% endfor %}
+  </ul>
+</div>
+{%else%}
+<p></p>
+{%endif%}
+
+{% if not request.user.is_authenticated %}
+    <form class="text-center" id="divlogin" method="POST">
+      {% csrf_token %}
+      <img class="mb-4" src="{% static 'img/conecte-se.png' %}" alt="" width="150em" heigth="auto">
+      <div class='formlogin'>
+        {{ form.username.label_tag }}
+        {{ form.username}}
+      </div>
+      <div class='formlogin' >
+        {{ form.password.label_tag }}
+        {{form.password}}
+      </div>
+    
+      <button class="btn btn-outline-success" type="submit" id="butonLogin">Entrar</button>
+    </form>
+  {% else %}
+  <div class="MenuIndex">
+    <div class="cimaBaixoIndex">
+        <a href="{%url 'lucro'%}">
+        <div class="blocoIndex">
+            <div class="imgp">
+                <svg width="137" height="128" viewBox="0 0 137 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M68.5 124C104.122 124 133 97.1368 133 64C133 30.8629 104.122 4 68.5 4C32.8776 4 4 30.8629 4 64C4 97.1368 32.8776 124 68.5 124Z" stroke="white" stroke-width="7.26742" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M87.85 43C83.4318 38.8901 75.6511 36.0313 68.5 35.8523M68.5 35.8523C59.9918 35.6393 52.375 39.2199 52.375 49.0001C52.375 67 87.85 58 87.85 76C87.85 86.266 78.4085 90.6772 68.5 90.346M68.5 35.8523V25M49.15 82C53.3069 87.1558 61.0361 90.0964 68.5 90.346M68.5 90.346V103" stroke="white" stroke-width="7.26742" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    
+            <p>Lucro</p>
+            </div>
+        </div>
+        </a>
+        <div class="blocoIndex">
+            <a href="{%url 'entradas'%}">
+                <div class="blocoIndex">
+                    <div class="imgp">
+                        <svg width="137" height="128" viewBox="0 0 137 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M62.8761 3.94846L64.0793 81.1791M64.0793 81.1791L104.182 49.6545M64.0793 81.1791L23.014 50.9191M124.835 72.5075L125.316 103.4L3.5642 105.297L3.0829 74.4045" stroke="white" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            
+                            
+                    <p>Entradas</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+    <br>
+    <div class="cimaBaixoIndex">
+        <div class="blocoIndex">
+            <a href="{% url 'listaProdutos'%}">
+                <div class="blocoIndex">
+                    <div class="imgp">
+                        <svg width="172" height="120" viewBox="0 0 172 148" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9.31924 97.4885V143.954H73.1501V97.4885M30.5962 110.396H51.8732M4 82V97.4885H78.4694V82H4Z" stroke="white" stroke-width="7.36005" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M98.8499 97.5345V144H162.681V97.5345M120.127 110.442H141.404M93.5306 82.046V97.5345H168V82.046H93.5306Z" stroke="white" stroke-width="7.36005" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M47.809 19.4885V65.954H111.64V19.4885M69.086 32.3956H90.363M42.4898 4V19.4885H116.959V4H42.4898Z" stroke="white" stroke-width="7.36005" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>           
+                    <p>Estoque</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="blocoIndex">
+            <a href="{% url 'saidas' %}">
+                <div class="blocoIndex">
+                    <div class="imgp">
+                        <svg width="111" height="85" viewBox="0 0 111 85" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M18.7201 18.7201H107.041L96.0007 66.5605H29.7602M96.0007 81.2806H33.4402L15.0401 4H4" stroke="white" stroke-width="7.36005" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M88.6406 69.3607C92.7054 69.3607 96.0006 66.0655 96.0006 62.0007C96.0006 57.9358 92.7054 54.6406 88.6406 54.6406C84.5757 54.6406 81.2805 57.9358 81.2805 62.0007C81.2805 66.0655 84.5757 69.3607 88.6406 69.3607Z" stroke="white" stroke-width="7.36005" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M40.8002 69.3607C44.8651 69.3607 48.1603 66.0655 48.1603 62.0007C48.1603 57.9358 44.8651 54.6406 40.8002 54.6406C36.7354 54.6406 33.4402 57.9358 33.4402 62.0007C33.4402 66.0655 36.7354 69.3607 40.8002 69.3607Z" stroke="white" stroke-width="7.36005" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                            
+                            
+                    <p class="pIndex">Saida</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+    
+</div>
+  {% endif %}
+{% endblock conteudo %}

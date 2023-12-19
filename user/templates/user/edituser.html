@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% load permission_tags %}
+
+{% block title %}Editar Usuário{% endblock title %}
+
+{% block titulo %}Editar Usuário{% endblock titulo %}
+
+{% block conteudo %}
+
+{% if form_errors %}
+  <div class="alert alert-danger">
+    <strong>Erro ao atualizar usuário:</strong>
+    <ul>
+      {% for field, errors in form_errors %}
+        {% for error in errors %}
+          <li>{{ field }}: {{ error }}</li>
+        {% endfor %}
+      {% endfor %}
+    </ul>
+  </div>
+{% endif %}
+
+    <form class="text-center" method="POST">
+        {% csrf_token %}
+
+      <div id='cadastro'>
+
+        <div class='formcadast'>
+            {{ form.first_name.label_tag }}
+            {{form.first_name}}
+            
+          </div>
+
+        <div class='formcadast'>
+          {{ form.last_name.label_tag }}
+          {{form.last_name}}
+
+        </div>
+
+        {% if form.instance.id == user.id %}
+          <div class='formcadast'>
+            {{ form.novasenha.label_tag }}
+            {{form.novasenha}}
+              
+          </div>
+
+          <div class='formcadast'>
+            <label  for="'confirmarsenha">Repetir Senha</label>
+               {{form.confirmarsenha}}
+          </div>
+
+          {%else%}
+          <p></p>
+          {%endif%}
+          {%if user|has_role:"gerente"%}
+
+          <div class='formcadast'>
+            <div id="selecycadastro">
+          <label  for="id_select">Perfil</label>
+          <select id="id_select" name="opc">
+            <option value="1">Vendedor</option>
+            <option value="0">Gerente</option>
+          </select>
+        </div>
+          </div>
+          <br>
+          {%else%}
+          <p></p>
+          {%endif%}
+          
+          <div class='butooncadast'>
+          <button class="w-50 btn btn-lg btn-primary" type="submit">Salvar</button>
+          </div>
+        </div>
+        
+    </form>
+
+{% endblock conteudo %}

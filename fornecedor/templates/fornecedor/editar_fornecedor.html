@@ -1,0 +1,162 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Editar Fornecedor{% endblock title %}
+
+{% block titulo %}
+    Editar fornecedor: {{ fornecedor.razaosocial }}
+{% endblock titulo %}
+
+{% block conteudo %}
+    <form method="post" enctype="multipart/form-data" class="mt-4">
+        {% csrf_token %}
+        
+        <div class="mb-3 row">
+            <label for="razaoSocial" class="col-sm-2 col-form-label">Razão Social:</label>
+            <div class="col-sm-10">
+                <input type="text" id="razaoSocial" name="razaosocial" class="form-control" value="{{ fornecedor.razaosocial }}" required>
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+            <label for="cnpj" class="col-sm-2 col-form-label">CNPJ:</label>
+            <div class="col-sm-10">
+                <input type="text" id="cnpj" name="cnpj" class="form-control" value="{{ fornecedor.cnpj }}" required>
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+            <label for="telefone" class="col-sm-2 col-form-label">Telefone:</label>
+            <div class="col-sm-10">
+                <input type="text" id="telefone" name="telefone" class="form-control" value="{{ fornecedor.telefone }}" required>
+            </div>
+        </div>
+
+        <div class="mb-3 row">
+            <label for="endereco" class="col-sm-2 col-form-label">Endereço:</label>
+            <div class="col-sm-10">
+                <input type="text"  id="endereco" name="endereco" class="form-control" value="{{ fornecedor.endereco }}" required>
+            </div>
+        </div>
+
+        <div class="btn-group btn_forn_edit d-flex justify-content-center" role="group" aria-label="Botões de Ação">
+            {% if fornecedor.ativo %}
+                <div id="contfornecedor2" class="mb-3 mx-3">
+                    <a href="#" data-toggle="modal" data-target="#confirmarInativacaoModal" class="btn btn-lg btn-danger">Inativar</a>
+                </div>
+            {% else %}
+                <div id="contfornecedor2" class="mb-3 mx-3">
+                    <a href="#" onclick="ativarFornecedor()" class="btn btn-lg btn-success">Ativar</a>
+                </div>
+            {% endif %}
+            
+            <div id="contforncedor" class="mb-3">
+                <button class="btn btn-lg btn-primary" type="submit">Salvar</button>
+            </div>
+        </div>
+        
+        
+    <!-- Janela Modal de confirmação de inativação -->
+    <div class="modal fade" id="confirmarInativacaoModal" tabindex="-1" role="dialog" aria-labelledby="confirmarInativacaoModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmarInativacaoModalLabel">Confirmação de Inativação</h5>
+                </div>
+                <div class="modal-body">
+                    <p>Você tem certeza que deseja inativar o fornecedor {{ fornecedor.razaosocial }}?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" onclick="inativarFornecedor()">Confirmar Inativação</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Janela Modal de confirmação de ativação -->
+    <div class="modal fade" id="confirmarAtivacaoModal" tabindex="-1" role="dialog" aria-labelledby="confirmarAtivacaoModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmarAtivacaoModalLabel">Confirmação de Ativação</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Você tem certeza que deseja ativar o fornecedor {{ fornecedor.razaosocial }}?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" onclick="confirmarAtivacao()">Confirmar Ativação</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="cancelarAtivacao">Cancelar</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+</form>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    function inativarFornecedor() {
+        // vai fazer a inativação do fornecedor
+        $.ajax({
+            url: '{% url 'inativar_fornecedor' fornecedor.id %}',
+            type: 'POST',
+            data: {'csrfmiddlewaretoken': '{{ csrf_token }}'},
+            success: function (data) {
+             
+                location.reload(); 
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+
+    function ativarFornecedor() {
+        // vai mostrar janela modal de confirmação de ativação
+        $('#confirmarAtivacaoModal').modal('show');
+    }
+
+    function confirmarAtivacao() {
+        // vai fazer a ativação do fornecedor
+        $.ajax({
+            url: '{% url 'ativar_fornecedor' fornecedor.id %}',
+            type: 'POST',
+            data: {'csrfmiddlewaretoken': '{{ csrf_token }}'},
+            success: function (data) {
+                // vai mostrar a janela modal de confirmação de ativação
+                $('#confirmarAtivacaoModal').modal('hide'); 
+                $('#confirmarAtivacaoSucessoModal').modal('show'); 
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+
+ 
+    $('#confirmarAtivacaoModal').on('hidden.bs.modal', function (e) {
+      
+        $(this).off('hidden.bs.modal');
+     
+    });
+
+    $('#cancelarAtivacao').on('click', function() {
+       
+        window.location.href = '{% url 'editar_fornecedor' fornecedor.id %}';
+
+    });
+</script>
+
+
+
+
+
+
+
+{% endblock conteudo %}

@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Produtos{% endblock title %}
+
+{% block titulo %}
+Cadastrar Produto
+{% endblock titulo %}
+
+{% block conteudo %}
+    <form  method="POST" enctype="multipart/form-data" class="mt-4">
+        {% csrf_token %}
+
+        <div class="input-group mb-4">
+            <label for="nome" class="col-sm-2 col-form-label">Nome:</label>
+            <input type="text" id="nome" name='nome' placeholder="Nome do produto" class="form-control" style="color: black !important;" required>
+
+        </div>
+
+        <div class="input-group mb-4">
+            <label for="preco" class="col-sm-2 col-form-label">Preço:</label>
+            <input type="text" id="preco" name='preco' placeholder="Preço" class="form-control"style="color: black !important;" required>
+        </div>
+
+        <div class="input-group mb-4">
+            <label for="precovenda" class="col-sm-2 col-form-label">Preço de venda:</label>
+            <input type="text" id="precovenda" name='precovenda' placeholder="Preço de venda" class="form-control " style="color: black !important;" required>
+        </div>
+
+        <div class="input-group mb-4">
+            <label for="fornecedor" class="col-sm-2 col-form-label">Fornecedor:</label>
+            <select id="fornecedor" name="fornecedor" class="form-control " style="color: black !important;" required>
+                {% for fornecedor in fornecedores %}
+                    <option value="{{ fornecedor.id }}">{{ fornecedor.razaosocial }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="input-group mb-4">
+            <label for="estoquemin" class="col-sm-2 col-form-label">Mínimo:</label>
+            <input type="text" id="estoquemin" name='estoquemin' placeholder="Quant. Mínima" class="form-control " style="color: black !important;" required>
+        </div>
+
+        <div class="input-group mb-4">
+            <label for="categoria" class="col-sm-2 col-form-label">Categoria:</label>
+            <select id="categoria" name="categoria" class="form-control" style="color: black !important;" required>
+                {% for categoria in categorias %}
+                    <option value="{{ categoria.id }}">{{ categoria.nome }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="input-group mb-4">
+            <label for="descricao" class="col-sm-2 col-form-label">Descrição:</label>
+            <textarea id="descricao" name="descricao" placeholder="Descrição do produto" class="form-control " style="color: black !important;" required></textarea>
+        </div>
+
+        <div class="input-group mb-4">
+            <label for="ncm" class="col-sm-2 col-form-label">NCM:</label>
+            <input type="text" name='ncm' id="ncm" placeholder="Código do produto" class="form-control " style="color: black !important;" required>
+        </div>
+
+        <div id="contforncedor">
+            <button class="w-25 btn btn-lg btn-primary mx-auto" type="submit">Cadastrar</button>
+        </div>
+    </form>
+{% endblock conteudo %}

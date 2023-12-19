@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load static %}
+{%block title %}Produtos{%endblock title %}
+
+{%block titulo %}
+Meus Produtos
+
+{%endblock titulo %}
+
+{% block conteudo %}
+<div class="buscarButtonColuna">
+
+        <div class="buscarButton">
+        <form class="row g-2 align-items-center">
+                <div class="col-auto">
+                        <input type="search" class="form-control mr-sm-2" autocomplete="off"  placeholder="Pesquisar" name="pesquisa"> 
+                </div>        
+                <div class="col-auto">
+                        <button class="btn btn-outline-success" type="submit">Pesquisar</button>
+                </div>
+        </form>
+        </div>
+
+        <div class='buttoncadastrar'>
+
+        <div><a href="{%url 'add_produtos'%}"><button class="btn btn-success" type="button">Cadastrar Produto</button><a/>
+        
+            <a href="{% url 'listagem_categorias' %}"><button class="btn btn-primary" type="button">Categoria</button></a>
+
+            <a href="{% url 'listarfornecedor' %}"><button class="btn btn-primary" type="button">Fornecedor</button></a>
+
+
+
+        </div>
+
+        </div>
+        </div>
+
+        <div class="table-content table-responsive text-center">
+
+                <table class="table table-hover">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Nome</th>
+                                <th>Status</th>
+                                <th>Preço</th>
+                                <th>Descrição</th>
+                                <th colspan="2">Operações</th>
+                            </tr>
+                        </thead>
+
+                        <tbody class='table-light'>
+                            {% for produto in produtos %}
+                                <tr>
+                                    <td>{{ produto.nome }}</td>
+                                    <td>
+                                        {% if produto.estoque == 0 %}
+                                            Esgotado
+                                        {% elif produto.estoque <= produto.estoquemin %}
+                                            Disponível (Abaixo da Quantidade Mínima)
+                                        {% else %}
+                                            Disponível
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ produto.precovenda }}</td>
+                                    <td>{{ produto.descricao }}</td>
+                                    <td>
+                                        {% if produto.fornecedor and produto.fornecedor.id %}
+                                            <a href="{% url 'prod_exibir' produto.id produto.fornecedor.id %}">
+                                                <button type="button" class="btn btn-primary btn-sm">Exibir</button>
+                                            </a>
+                                        {% endif %}
+                                    </td>
+                                    
+                                    <td><a href="{% url 'editarProdutos' produto.id %}" class="btn btn-secondary btn-sm">Editar</a></td>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+        </div>
+{% endblock conteudo %}

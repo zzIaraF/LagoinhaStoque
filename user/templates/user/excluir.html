@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Usuário {% endblock title %}
+
+{% block titulo %}Excluir Usuário{% endblock titulo %}
+
+{% block conteudo %}
+        <form id="form_del" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="id" value="{{usuario.id}}">
+        </form>
+            <hr>
+            <div class="saidaexclusao">
+            <p class="p_excluir">Deseja realmente excluir o Usuário {{usuario.first_name}}?</p><br>
+                <a href="{% url 'exibiruser' %}">
+                    <button type="button" class="btn btn-secondary btn-sm">Cancelar</button>
+                </a>
+                <input form="form_del" type="submit" class="btn btn-danger btn-sm" value="Excluir">
+            </div>
+
+
+
+{% endblock conteudo %}

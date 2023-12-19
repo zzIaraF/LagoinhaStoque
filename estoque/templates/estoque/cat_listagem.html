@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load permission_tags %}
+{%block title %}Categorias{%endblock title %}
+
+{%block titulo %}
+Minhas Categorias
+
+{%endblock titulo %}
+
+{% block conteudo %}
+
+<div class="buscarButtonColuna">
+
+        <div class="buscarButton">
+                <form class="row g-2 align-items-center">
+                        <div class="col-auto">
+                                <input type="search" class="form-control mr-sm-2" autocomplete="off"  placeholder="pesquisa" name="pesquisa"> 
+                        </div>        
+                        <div class="col-auto">
+                                <button class="btn btn-outline-success" type="submit">Pesquisar</button>
+                        </div>
+                </form>
+                </div>
+        
+        <div class='buttoncadastrar'>
+
+        <div>
+        
+                <a href="{% url "cadastro_categorias" %}">&nbsp;<button class="btn btn-success" type="button">Cadastrar</button><a/>
+        </div>
+
+        </div>
+</div>
+
+
+<div class="table-content table-responsive text-center">
+        <table class="table table-hover">
+                <thead class="table-dark">
+                        <tr>
+                                <th>Nome</th>
+                                <th colspan="3" class="text-md-center">Operações</th>
+                        </tr>
+                </thead>
+                <tbody class='table-light'>
+                    {% for categoria in categorias %}
+                    <tr>
+                            <td>{{categoria.nome}}</td>
+                            <td><a href="{% url "editar_categorias" categoria.id %}"><button type="button" class="btn btn-secondary btn-sm">Editar</button></a></td>
+                            {%if user|can:"ex_cat"%}
+                            <td><a href ="{% url "excluir_categorias" categoria.id %}"><button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">Remover</button></a></td>
+                            {%else%}
+                            <td><p>:)</p></td>
+                            {% endif %}
+
+                                
+                        
+                       </div>
+                    </tr>
+                    
+                    {% endfor %}
+                </tbody>
+        </table>
+</div>
+{% endblock conteudo %}

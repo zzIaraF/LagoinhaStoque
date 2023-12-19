@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Saídas {% endblock title %}
+
+{% block titulo %}Saídas{% endblock titulo %}
+
+{% block conteudo %}
+    <form method="post" enctype="multipart/form-data" class="formsaidas">
+        {% csrf_token %}
+    
+        <div class="inptsaidas" id="inputemcima">
+            <label>Produto: {{form.nomedoproduto}}<label> 
+    
+            <label>Quantidade: {{form.quantidade}}</label>
+           
+        </div>
+
+        <div  class="inptsaidas" id="inputembaixo">
+            <div id="saidadata">
+            <label>Data: </label>
+            {{form.data}}
+            <button type="submit" class="btn btn-primary">Incluir</button>
+            </div>
+        </div>
+    
+
+    </form>
+    <form method="post" action="{% url 'exibirsaidas' %}" class="formsaidas">
+        {% csrf_token %}
+        <div class="inptsaidasexibir">
+            <label>Exibir Saídas</label>
+            <div id="saidadataexibir">
+                <label for="data">Data:</label>
+                {{form.data}}
+                <button type="submit" class="btn btn-primary">Exibir Saídas</button>
+             </div>
+        </div>
+    </form>
+
+    <br>
+    <div class="containerSaidas">
+        <div class="saidas-container">
+            {% if saidas %}
+                {% for saida in saidas %}
+                <div>
+                <div class="infsaida">
+                    <p>{{ saida.id }}</p>
+                    <p>{{ saida.data }}</p>
+                    <p>{{ saida.produto }}</p>
+                    <p>{{ saida.quantidade }}x</p>
+                    
+                    <a href="{% url "editsaidas" saida.id %}">
+                        <button type="button" class="btn btn-secondary btn-sm">Editar</button>
+                    </a>
+
+                    <a href="{% url "delsaidas" saida.id %}">
+                        <button type="button" class="btn btn-danger btn-sm">Excluir</button>
+                    </a>
+        
+                    
+                </div>
+                    <hr>
+                </div>
+                {% endfor %}
+            {% else %}
+                <p>Insira seus produtos</p>
+            {% endif %}
+        </div>
+        <div class="outra-div">
+
+            <p>Valor Total:</p>
+            <div id="valortotal"><p>{{ valortotal|default:"0.00"|floatformat:2  }}</p></div>
+
+            <a href="{% url "home" %}">
+                <button type="button" class="btn btn-primary">Finalizar</button>
+            </a>
+        </div>
+
+        
+    </div>
+
+</div>
+
+
+</div>
+
+
+
+{% endblock conteudo %}
+
+{% block scripts %}
+    <script src="{% static 'js/clear.js' %}"></script>
+{% endblock scripts %}

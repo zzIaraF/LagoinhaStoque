@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Saídas {% endblock title %}
+
+{% block titulo %}Edite a Saída{% endblock titulo %}
+
+{% block conteudo %}
+    <form method="post" class="formsaidas">
+        {% csrf_token %}
+        <div class="inptsaidas" id="inputemcima">
+            <label>Produto {{form.nomedoproduto}}<label> 
+    
+            <label>Quantidade{{form.quantidade}}</label>
+           
+        </div>
+
+        <div  class="inptsaidas" id="inputembaixo">
+            <div id="saidadata">
+            <label>Data</label>
+            {{form.data}}
+            <button type="submit" class="btn btn-primary">Salvar</button>
+            </div>
+        </div>
+
+    </form>
+    <br>
+
+
+</div>
+
+{% endblock conteudo %}

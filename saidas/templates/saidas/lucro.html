@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Lucro {% endblock title %}
+
+{% block titulo %}Lucro{% endblock titulo %}
+
+{% block conteudo %}
+   <div id="containerlucro">
+
+    <div id="lucro">
+
+        <div id="diario" class="lucros" action="">
+            <h2>Lucro Diário</h2>
+            <form method="post" action="{%url "lucrodia"%}" >
+                {% csrf_token %}
+            <div class="data">
+                <label>Digite a data: <input type="date" name="dataDia"></label>
+                <button type="submit" class="btn btn-primary">Enviar</button>    
+            </div>
+            </form>
+            <label>Vendas do dia: {{ valortotal|default:"0.00"|floatformat:2  }}</label>
+            <label>Lucro do dia: {{ lucro|default:"0.00"|floatformat:2  }}</label>
+            <label>Total de vendas: {{ quantidadetotal|default:0 }}</label>
+        </div>
+        <hr>
+        <div id="mensal" class="lucros">
+            <h2>Lucro mensal</h2>
+            <form method="post" action="{% url 'lucromes' %}" >
+                {% csrf_token %}
+            <div class="data">
+                <label>Digite a data inicial: <input type="date" name="dataI"></label>
+                <label>Digite a data final: <input type="date" name="dataF"></label>
+                <button type="submit" class="btn btn-primary">Enviar</button>    
+            </div>
+            </form>
+
+            <label>Vendas do mês: {{ valortotalM|default:"0.00"|floatformat:2  }}</label>
+            <label>Lucro do dia: {{ lucroM|default:"0.00"|floatformat:2  }}</label>
+            <label>Total de vendas: {{ quantidadetotalM|default:0 }}</label>
+        </div>
+
+    </div>
+
+    </div>
+
+{% endblock conteudo %}

@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Entradas {% endblock title %}
+
+{% block titulo %}Entradas{% endblock titulo %}
+
+{% block conteudo %}
+    <form method="post" enctype="multipart/form-data" class="formsaidas">
+        {% csrf_token %}
+    
+        <div class="inptsaidas" id="inputemcima">
+            <label>Produto: {{form.nomedoproduto}}<label> 
+    
+            <label>Quantidade: {{form.quantidade}}</label>
+           
+        </div>
+
+        <div  class="inptsaidas" id="inputembaixo">
+            <div id="saidadata">
+            <label>Data: </label>
+            {{form.data}}
+            <button type="submit" class="btn btn-primary">Incluir</button>
+            </div>
+        </div>
+    
+
+    </form>
+    <form method="post" action="{% url 'exibirentradas' %}" class="formsaidas">
+        {% csrf_token %}
+        <div class="inptsaidasexibir">
+            <label>Exibir Entradas</label>
+            <div id=saidadataexibir>
+                <label for="data">Data:</label>
+                {{form.data}}
+                <button type="submit" class="btn btn-primary">Exibir Entradas</button>
+             </div>
+        </div>
+    </form>
+
+    <br>
+    <div class="containerSaidas">
+        <div class="saidas-container">
+            {% if entradas %}
+                {% for entrada in entradas %}
+                <div>
+                    <div class="infsaida">
+                        <p>{{ entrada.data }}</p>
+                        <p>{{ entrada.produto }}</p>
+                        <p>{{ entrada.quantidade }}x</p>
+                        
+                        <a href="{% url "edientradas" entrada.id %}">
+                            <button type="button" class="btn btn-secondary btn-sm">Editar</button>
+                        </a>
+
+                        <a href="{% url "delentradas" entrada.id %}">
+                            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                Remover
+                            </button>
+                        </a>
+    
+                <!-- Modal -->
+               
+                    
+                </div>
+                    <hr>
+                </div>
+                {% endfor %}
+            {% else %}
+                <p>Insira seus produtos</p>
+            {% endif %}
+        </div>
+        <div class="outra-div">
+
+            <p>Valor Total:</p>
+            <div id="valortotal"><p>{{ valortotal|default:"0.00"|floatformat:2  }}</p></div>
+
+            <a href="{% url "home" %}">
+                <button type="button" class="btn btn-primary">Finalizar</button>
+            </a>
+        </div>
+    </div>
+
+</div>
+
+
+</div>
+
+
+
+{% endblock conteudo %}
+{% block scripts %}
+    <script src="{% static 'js/clear.js' %}"></script>
+{% endblock scripts %}

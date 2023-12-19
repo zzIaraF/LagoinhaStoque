@@ -1,0 +1,513 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.success-message{
+    background-color: green;
+    color: white;
+    width: 100%;
+}
+
+.error-message {
+    background-color: red;
+    color: white;
+}
+
+body, html {
+    height: auto;
+    margin: 0;
+    width: auto;
+}
+
+main {
+    display: flex;
+    height: 100%;
+    min-height: 100vh; 
+}
+
+
+#baseDiv{
+    background-color: #212529;
+    width: 100%;
+    color: white;
+    display: flex;
+    align-items: center;
+    margin-bottom: 5vh;
+}
+#baseDiv h1{
+    margin: 5px 0 5px 10px;
+    font-size: 25px;
+    display: flex;
+
+}
+
+.navbar-brand{
+    color: #FD9E0F !important;
+}
+
+.btn-outline-success {
+    color: #FD9E0F !important;
+    border-color: #FD9E0F !important;
+}
+.btn-primary{
+    background-color: #FD9E0F !important;
+    border-color: #FD9E0F !important;
+}
+.btn-outline-success:hover {
+    background-color: #FD9E0F !important;
+    color: #fff !important;
+}
+
+.nav-link{
+    color: white !important;
+}
+
+.nav-link:hover{
+    color: #FD9E0F !important;
+}
+
+#sairnav{
+    margin: 5px 10px 0 25px
+}
+
+#perfilnav{
+    margin: 5px 0 0 0 !important;
+}
+
+footer{
+    background-color: #212529;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#ladoEsquerdobase {
+    flex: 0 0 20%; /* 30% da largura da tela, sem crescimento ou encolhimento */
+    background-color: #212529; /* Cor de fundo opcional */
+    padding: 20px; /* Espaçamento interno opcional */
+    box-sizing: border-box; /* Inclui borda e preenchimento na largura total */
+}
+
+
+#ladoDireitobase {
+    flex: 1; /* Ocupa o restante do espaço disponível */
+    background-color: #3D3D3D; /* Cor de fundo opcional */
+    padding: 20px; /* Espaçamento interno opcional */
+    box-sizing: border-box; /* Inclui borda e preenchimento na largura total */
+}
+
+
+.nav-item ul{
+    background-color: #212529 !important;
+}
+
+
+/* Estilos para o conteúdo dentro do lado direito (bloco de conteúdo) */
+.baseDiv p {
+    font-size: 16px;
+}
+
+
+.cimaBaixoIndex{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.blocoIndex{
+    width: 20vw;
+    height: 35vh;
+    background-color: #212529;
+    margin: 20px;
+    border-radius: 32px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+.blocoIndex:hover{
+    cursor: pointer;
+}
+
+.imgp{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+svg{
+    max-width: 100%;
+    height: auto;
+
+}
+
+
+.imgp p {
+    font-size: 2vw;
+    color: white;
+}
+a{
+    text-decoration: none;
+}
+
+/* css de prod listagem */
+.buscarButtonColuna{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 20px;
+}
+
+.buttoncadastrar{
+    margin-top: 20px;
+}
+
+/* css add produto */
+.dividir {
+    display: flex;
+    justify-content: space-between;
+ 
+}
+
+.preco, .estoque{
+    width: 30%;
+
+}
+
+.seprar{
+    margin: 0 10% 0 0;
+}
+
+#divcima{
+    margin-top: 5%;
+}
+
+/* login */
+#divlogin{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.formlogin{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#butonLogin{
+    width: 20% !important;
+}
+
+.formlogin label{
+    color: white;
+    margin: 0 1vh 0 0;
+    font-size: 20px;
+}
+
+.formlogin input{
+    margin: 0 0 2vh 0 ;
+    height: 5vh;
+}
+#semlogin{
+    font-size: 20px;
+    color: white;
+}
+
+a{
+    text-decoration: none !important;
+}
+
+#cadastro{
+    margin: 2vw 0;
+    padding: 0 3vw;
+}
+.formcadast {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.formcadast input{
+    width: 75%;
+    margin: 0 0 2vh 0 ;
+}
+
+.formcadast label{
+    color: white;
+    margin: 0 1vh 0 0;
+    font-size: 3vh;
+
+}
+
+.butooncadast button{
+    width: 10vw !important;
+}
+
+#selecycadastro{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+}
+
+#selecycadastro select{
+    width: 75%;
+}
+
+/* Categoria */
+#cat_nome {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    width: 900px;
+}
+
+/* saidas / lucro*/
+
+.formsaidas{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#inputemcima, #inputembaixo{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+.inptsaidas, .inptsaidasexibir{
+    display: flex;
+    flex-direction: row;
+}
+
+.inptsaidas input{
+    width: 30vw;
+    
+}
+
+.inptsaidas label, .inptsaidasexibir label{
+    margin: 0 0 7px 7px;
+    color: white;
+    font-size: 20px;
+    
+}
+
+.inptsaidasexibir{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.inptsaidas input{
+    width: 30vw;
+    
+}
+
+.inptsaidas label{
+    margin: 0 0 1vh 1vh;
+    color: white;
+    
+}
+
+#inputembaixo input{
+    width: 10vw;
+}
+
+#saidadata label{
+    margin: 0 2vw 0 5px;
+}
+
+#saidadata button, #saidadataexibir button{
+    margin: 0 0 0 2vw;
+}
+
+.containerSaidas {
+    display: flex;
+    margin: 1vw;
+}
+
+.saidas-container {
+    width: 60%;
+    padding: 20px; 
+    background-color: white;
+   
+}
+
+.outra-div {
+    width: 40%;
+    padding: 20px; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.infsaida{
+    display: flex;
+    flex-direction: row;
+    margin: 2vw;
+    justify-content: space-between;
+}
+
+.infsaida p{
+    margin: 1vw;
+}
+
+.infsaida hr{
+    border: 2px black solid;
+}
+
+.outra-div p{
+    color: white;
+    font-size: 20px;
+}
+
+#valortotal{
+    width: 20vw;
+    height: 20vh;
+    background-color: #212529;
+    margin-bottom: 4vh;
+}
+
+.outra-div button{
+    width: 10vw;
+    height: 10vh;
+    font-size: 30px;
+}
+
+
+#containerlucro{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#lucro{
+    display: flex;
+    flex-direction: column;
+    width: 60vw;
+    height:65vh; /* o certo é ser auto */
+    background-color: white;
+    padding: 3vh;
+}
+
+
+
+.lucros{
+    display: flex;
+    flex-direction: column;
+}
+
+.lucros h2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.data{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+}
+.data button{
+    margin: 0 0  0 1vw;
+}
+
+.lucros label{
+    font-weight: bold;
+    font-size: 15px;
+}
+
+#valortotal{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* css estoque */
+
+form.mt-4 label { 
+  
+    font-size: 20px;
+    color:#fff;
+
+}
+
+form.mt-4 span {
+  
+    font-size: 20px;
+    color:#fff;
+
+}
+
+#nome{
+    font-size: 20px;
+    color:#fff;
+}
+#preco{
+    font-size: 20px;
+    color:#fff;
+}
+#precovenda{
+    font-size: 20px;
+    color:#fff;
+}
+#estoquemin{
+    font-size: 20px;
+    color:#fff; 
+}
+#descricao{
+    font-size: 20px;
+    color: #fdfafa; 
+}
+#ncm{
+    font-size: 20px;
+    color:#fff; 
+}
+
+
+#contforncedor, #contfornecedor2{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#contfornecedor button{
+    width: 5vw;
+}
+
+#det_forn{
+display: flexbox;
+flex-direction: column;
+
+}
+
+.input-group input,
+.input-group select,
+.input-group textarea {
+    border-color: #000 !important;
+    box-shadow: none !important; 
+}
+
+/* exclusão */
+
+.saidaexclusao p{
+    color: white;
+    font-size: 20px;
+
+}
+
+
+#rodape{
+   margin: 10px;
+}

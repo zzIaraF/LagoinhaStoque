@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Fornecedor{% endblock title %}
+
+{% block titulo %}
+    Meus fornecedores
+{% endblock titulo %}
+
+{% block conteudo %}
+    <div class="buscarButtonColuna">
+        <div class="buscarButton">
+            <form class="row g-2 align-items-center" method="get" action="{% url 'listarfornecedor' %}">
+                <div class="col-auto">
+                    <input type="search" class="form-control mr-sm-2" name="search" autocomplete="off" placeholder="Pesquisar"> 
+                </div>        
+                <div class="col-auto">
+                    <button class="btn btn-outline-success" type="submit">Pesquisar</button>
+                </div>
+            </form>
+        </div>
+        
+     
+        <div class='buttoncadastrar'>
+            <div>
+                <a href="{% url 'cadastrarfornecedor' %}"><button class="btn btn-success" type="button">Cadastrar</button></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="table-content table-responsive text-center">
+        <table class="table table-hover">
+            <thead class="table-dark">
+                <tr>
+        
+                    <th>Razão social</th>
+                    <th>CNPJ</th>
+                    <th>Status</th>
+                    <th colspan="2">Operações</th>
+                </tr>
+            </thead>
+            <tbody class='table-light'>
+                {% for fornecedor in fornecedores %}
+                    <tr>
+                    
+                        <td>{{ fornecedor.razaosocial }}</td>
+                        <td>{{ fornecedor.cnpj }}</td>
+                        <td>
+                            {% if fornecedor.ativo %}
+                                Ativo
+                            {% else %}
+                                <span class="text-danger">Inativo</span>
+                            {% endif %}
+                        </td>
+                        <td><a href="{% url 'exibirfornecedor' fornecedor.id %}"><button type="button" class="btn btn-primary btn-sm">Exibir</button></a></td>
+                        <td><a href="{% url 'editar_fornecedor' fornecedor.id %}"><button type="button" class="btn btn-secondary btn-sm">Editar</button></a></td>
+                       
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock conteudo %}

@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Detalhes do Produto{% endblock title %}
+{% block titulo %}
+Detalhes do produto: {{ produto.nome }}
+{% endblock titulo %}
+{% block conteudo %}
+    <div class="card">
+        <div class="card-header text-white bg-dark">
+                Categoria: {{ produto.categoria.nome }}
+        </div>
+        <div class="card-body">
+            <h5 class="card-title mb-3"> Nome: {{ produto.nome }}</h5>
+            <h5 class="card-title mb-3">Preço: R$ {{ produto.preco|floatformat:2 }}</h5>
+            <h5 class="card-title mb-3">Preço de venda: R$ {{ produto.precovenda|floatformat:2 }}</h5>
+            <h5 class="card-title mb-3">Quantidade no Estoque: {{ produto.estoque }}</h5>
+            <h5 class="card-title mb-3">Quantidade Mínima: {{ produto.estoquemin }}</h5>
+            <h5 class="card-text"> Descrição: {{ produto.descricao }}</h5>
+            <h5 class="card-title mb-3">NCM: {{produto.ncm}}</h5>
+            <h5 class="card-title mb-3">Fornecedor:{{ fornecedor.razaosocial}} </h5>
+            <h5 class="card-title mb-3">Cadastrado por: {{ produto.usuario}} </h5>
+        </div>
+        
+        <div class="card-footer text-white {% if produto.estoque == 0 %}bg-danger{% elif produto.estoque <= produto.estoquemin %}bg-warning{% else %}bg-success{% endif %}">
+            Status: {% if produto.estoque == 0 %}Esgotado{% elif produto.estoque <= produto.estoquemin %}Abaixo da Quantidade Mínima{% else %}Disponível{% endif %}
+        </div>
+        <div class="text-center mt-4 mb-2">
+            <a href="{% url 'editarProdutos' produto.id %}" class=" btn btn-secondary btn-sm">Editar</a>
+        </div>
+    </div>
+{% endblock conteudo %}

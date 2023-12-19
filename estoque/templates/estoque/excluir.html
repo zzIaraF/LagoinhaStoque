@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Categoria {% endblock title %}
+
+{% block titulo %}Excluir Categoria{% endblock titulo %}
+
+{% block conteudo %}
+        <form id="form_del" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="id" value="{{categoria.id}}">
+        </form>
+            <hr>
+            <div class="saidaexclusao">
+            <p class="p_excluir">Deseja realmente excluir a Categoria?</p><br>
+                <a href="{% url 'saidas' %}">
+                    <button type="button" class="btn btn-secondary btn-sm">Cancelar</button>
+                </a>
+                <input form="form_del" type="submit" class="btn btn-danger btn-sm" value="Excluir">
+            </div>
+
+
+
+{% endblock conteudo %}

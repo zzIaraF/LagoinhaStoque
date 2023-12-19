@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{%block title %}Categorias{%endblock title %}
+
+{%block titulo %}
+Editar Categoria {{ categoria.id }}
+{%endblock titulo %}
+
+{% block conteudo %}
+
+
+    <form class="mt-4" enctype="multipart/form-data" method="post" action="{% url 'editar_categorias' categoria.id %}">
+        {% csrf_token %}
+        
+        <div class="input-group mb-4">
+            <label for="nome" class="col-sm-2 col-form-label">Nome:</label>
+            <input type="text" id="id_nome" name='nome'  value="{{ categoria.nome}}" class="form-control" style="color: black !important;" required>
+
+        </div>
+
+        <div id="contforncedor"> 
+        <button  class="w-25 btn btn-lg btn-primary mx-auto" type="submit">Salvar</button>
+        </div>
+    </form>
+
+{% endblock conteudo %}

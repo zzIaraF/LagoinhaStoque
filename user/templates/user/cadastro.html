@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}Cadastrar Usuário{% endblock title %}
+
+{% block titulo %}Cadastrar Usuário{% endblock titulo %}
+
+{% block conteudo %}
+
+{% if form_errors %}
+  <div class="alert alert-danger">
+    <strong>Erro ao Criar usuário:</strong>
+    <ul>
+      {% for field, errors in form_errors %}
+        {% for error in errors %}
+          <li>{{ field }}: {{ error }}</li>
+        {% endfor %}
+      {% endfor %}
+    </ul>
+  </div>
+{% endif %}
+
+    <form class="text-center" method="POST">
+        {% csrf_token %}
+      <div id='cadastro'>
+        <div class='formcadast'>
+          {{ form.first_name.label_tag }}
+          {{form.first_name}}           
+
+        </div>
+        <div class='formcadast'>
+          {{ form.last_name.label_tag }}
+          {{form.last_name}}
+
+        </div>
+          
+          <div class='formcadast'>
+            {{ form.username.label_tag }}
+            {{form.username}}
+            
+          </div>
+
+          <div class='formcadast'>
+            {{ form.password1.label_tag }}
+            {{form.password1}}
+              
+          </div>
+
+          <div class='formcadast'>
+            <label  for="password2">Repetir Senha</label>
+               {{form.password2}}
+          </div>
+
+          <div class='formcadast'>
+              <div id="selecycadastro">
+            <label  for="id_select">Perfil</label>
+            <select id="id_select" name="opc">
+              <option value="1">Vendedor</option>
+              <option value="0">Gerente</option>
+            </select>
+          </div>
+          </div>
+          <br>
+          
+          <div class='butooncadast'>
+          <button class="w-50 btn btn-lg btn-primary" type="submit">Salvar</button>
+          </div>
+        </div>
+        
+    </form>
+
+{% endblock conteudo %}

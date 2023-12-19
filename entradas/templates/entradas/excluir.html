@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Entrada {% endblock title %}
+
+{% block titulo %}Excluir Entrada{% endblock titulo %}
+
+{% block conteudo %}
+        <form id="form_del" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="id" value="{{entrada.id}}">
+            <input type="hidden" name="quant" value="{{entrada.quantidade}}">
+        </form>
+            <hr>
+            <div class="saidaexclusao">
+            <p class="p_excluir">Deseja realmente excluir a entrada?</p><br>
+                <a href="{% url 'entradas' %}">
+                    <button type="button" class="btn btn-secondary btn-sm">Cancelar</button>
+                </a>
+                <input form="form_del" type="submit" class="btn btn-danger btn-sm" value="Excluir">
+            </div>
+
+
+
+{% endblock conteudo %}
