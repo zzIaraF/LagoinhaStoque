@@ -22,6 +22,7 @@ def cadastrarfornecedor(request): #cadastro do fornecedor
                 raise ValueError("Razão social inválida!")
 
             
+            cnpj = ''.join(char for char in cnpj if char.isdigit())
             if not cnpj.isdigit() or len(cnpj) != 14:
                 raise ValueError("CNPJ inválido!")
 
@@ -31,6 +32,10 @@ def cadastrarfornecedor(request): #cadastro do fornecedor
             
             if not endereco or endereco.isspace():
                 raise ValueError("Endereço inválido!")
+            
+            
+            if Fornecedor.objects.filter(Q(razaosocial=razaosocial) | Q(cnpj=cnpj)).exists():
+                raise ValueError("Razão social ou CNPJ já cadastrados!")
 
             # Obtém a data atual
             data = datetime.now()
