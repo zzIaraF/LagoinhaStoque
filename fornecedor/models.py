@@ -6,7 +6,7 @@ from django.utils import timezone
 
 class Fornecedor(models.Model):
     razaosocial = models.CharField(max_length=20)
-    cnpj = models.IntegerField(blank=True)
+    cnpj = models.CharField(max_length=14, blank=True)
     endereco = models.CharField(max_length=100)
     telefone = models.IntegerField()
     data = models.DateField(default=timezone.now)
