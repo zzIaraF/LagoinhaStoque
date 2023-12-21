@@ -27,10 +27,10 @@ O objetivo do projeto foi desenvolver um estoque de produtos para a Igreja Batis
 = Cadastro de Usuários (Vendedor e Gerente)
 
 ## Login do usuário 🧑
-user: usersimples (Função de Vendedor)
-User: superuser - (FUnção de Gerente)
-senha padão:
-senha123!
+- user: usersimples (Função de Vendedor)
+- User: superuser (Função de Gerente)
+- senha padão:
+- senha123!
 
 ## Projeto feito em equipe 🙏
 - @MaryVickk
